@@ -3,7 +3,6 @@ from Simulations import *
 
 days = 1000
 population = 1000000
-number_of_cities = 10
 
 alpha = 0.005
 beta = 0.01
@@ -18,20 +17,15 @@ P_modified = np.array([
 
 #Simulate infected population for one population once
 
-cities = []
-for i in range(number_of_cities):
-    susceptible = np.random.randint(700000,population)
-    infected = population - susceptible
-    Y0 = np.array([susceptible, infected, 0])
+susceptible = np.random.randint(700000,population)
+infected = population - susceptible
+Y0 = np.array([susceptible, infected, 0])
 
-    cities.append(Population(Y0, population))
+city = Population(Y0, population)
 
 def main():
     start = time()
-    counter = 0 
-    for city in cities:
-        counter += 1
-        city.simulate_population(days, "populationSimulation" + f"{counter}")
+    city.simulate_population(days, "populationSimulation")
     print("Execution time: ", time() - start)
 
 

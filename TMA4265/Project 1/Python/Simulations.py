@@ -6,6 +6,21 @@ from plot1 import *
 class Population:
 
     def __init__(self, Y0, population, alpha = 0.005, gamma = 0.10):
+        """
+        Initialize population        
+        Arguments
+        ---------------------------------------
+        Y0: numpy-array with length 3
+            Initial condition for the simulation of the form Y = [Susceptible, Infected, Recovered] at time 0
+        population: int
+            Number of individuals in the population
+        alpha: float
+            probability of recovered individual getting susceptible, default 0.005
+        gamma: float
+            probability of infected individual becoming recovered, default 0.10
+        
+        """
+        
         self.population = population #Population count
         self.Y0 = Y0 #Initial condition for the simulation of the form Y = [Susceptible, Infected, Recovered] at time 0
         self.alpha = alpha #probability of recovered individual getting susceptible
@@ -27,7 +42,15 @@ class Population:
         return None
 
     def simulate_population(self, days, path):
-        #Simulate disease in population for days number of days, and save plot
+        """
+        Simulates disease in population over days number of days, and save figure
+        
+        Arguments
+        ---------------------------------------
+        days: int
+            Number of days to be simulated
+        
+        """
         Y = np.zeros((self.Y0.size, days + 1), dtype = np.intc)
         Y[:,0] = self.Y0
 
@@ -43,9 +66,6 @@ class Population:
 
         return None
 
-    def introduce_infected(self, prob, Y_infected):
-
-        return None
 
 
 
@@ -124,38 +144,3 @@ def simulate_multiple_times(P, X0 = 0, M = 30):
     std = np.sqrt(np.array([np.var(pi_estimates[0]), np.var(pi_estimates[1]), np.var(pi_estimates[2])])/(M-1))
     
     return pi, std
-
-@jit(nopython = True)
-def simulate_Y(Y0, alpha = 0.005, gamma = 0.10, n = 300, N = 1000):
-    """
-    Simulates N individuals over n time-steps.
-    
-    Arguments
-    ---------------------------------------
-    Y0: numpy-array with length 3
-        Initial condition for the simulation of the form Y = [Susceptible, Infected, Recovered] at time 0
-    alpha: float
-        probability of recovered individual getting susceptible, default 0.005
-    gamma: float
-        probability of infected individual becoming recovered, default 0.10
-    n: int
-        Number of time-steps, default 300
-    N: int
-        Number of individuals in the population, default 1000
-        
-    Returns
-    ---------------------------------------
-    Y: 3x(n+1) matrix
-        Number of susceptible, infected and recovered individuals at each time step
-    """
-    Y = np.zeros((Y0.size, n + 1), dtype = np.intc)
-    Y[:,0] = Y0
-
-    for i in range (1, n + 1):
-        BinS = np.random.binomial(Y[0,i-1],0.5*Y[1,i-1]/N)#Binomial distribution of susceptible individuals becoming infected
-        BinI = np.random.binomial(Y[1,i-1],gamma)#Binomial distribution of infected individuals becoming recovered
-        BinR = np.random.binomial(Y[2,i-1],alpha)#Binomial distribution of recovered individuals becoming suscaptible
-        Y[0,i] = Y[0,i-1] + (BinR-BinS)
-        Y[1,i] = Y[1,i-1] + (BinS-BinI)
-        Y[2,i] = Y[2,i-1] + (BinI-BinR)
-    return Y

@@ -10,3 +10,11 @@ Find plots in the folder "Plots"
 ### Project 2 - Will be added soon (Group project)
 
 ## TMA4265 - Stochastic Modelling 
+
+### Project 1 - Simulation of herd immunity; Simulation of claims at incurance firm (Group Project)
+
+- Group project with Ingvild Ødegård and Inga Holt (Ingvlod and IngaFH on GitHub)
+
+## TMA4320 - Introduction to scientific computation (TMA4215 lite)
+
+### Project 3 (Individual project) - Study of different numerical ODE-solvers on the Hénon-Heiles system

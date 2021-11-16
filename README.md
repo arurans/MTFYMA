@@ -6,8 +6,9 @@
 
 Find plots in the folder "Plots"
 
+### Project 2 - Bézier Optimization with Gradient Descent (Group project)
 
-### Project 2 - Will be added soon (Group project)
+- Group project with Ingvild Ødegård and Inga Holt (Ingvlod and IngaFH on GitHub)
 
 ## TMA4265 - Stochastic Modelling 
 
